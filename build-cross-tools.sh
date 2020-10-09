@@ -34,6 +34,7 @@ if [ "$4" = "--with-python" ]; then
 fi
 
 ./build-llvm.sh $PREFIX --host=$HOST $LLVM_WITH_PYTHON
+./build-lldb-mi.sh $PREFIX --host=$HOST
 ./strip-llvm.sh $PREFIX --host=$HOST
 ./build-mingw-w64-tools.sh $PREFIX --skip-include-triplet-prefix --host=$HOST
 ./install-wrappers.sh $PREFIX --host=$HOST
