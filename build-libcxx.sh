@@ -174,7 +174,7 @@ build_all() {
             -DCMAKE_SHARED_LINKER_FLAGS="-lunwind" \
             -DLIBCXX_ENABLE_ABI_LINKER_SCRIPT=FALSE \
             ..
-        $BUILDCMD ${CORES+-j$CORES} generate-cxx-headers
+        $BUILDCMD ${CORES+-j$CORES} install-cxx-headers
         cd ..
     done
     cd ..
@@ -208,7 +208,7 @@ build_all() {
             -DLIBCXXABI_ENABLE_THREADS=ON \
             -DLIBCXXABI_TARGET_TRIPLE=$arch-w64-mingw32 \
             -DLIBCXXABI_ENABLE_SHARED=OFF \
-            -DLIBCXXABI_LIBCXX_INCLUDES=../../libcxx/build-$arch-$type/include/c++/v1 \
+            -DLIBCXXABI_LIBCXX_INCLUDES=$PREFIX/$arch-w64-mingw32/include/c++/v1 \
             -DLIBCXXABI_LIBDIR_SUFFIX="" \
             -DLIBCXXABI_ENABLE_NEW_DELETE_DEFINITIONS=ON \
             -DCXX_SUPPORTS_CXX_STD=TRUE \
