@@ -126,7 +126,6 @@ build_all() {
     cd ..
 
     cd libcxxabi
-    touch include/__config_site
     for arch in $ARCHS; do
         [ -z "$CLEAN" ] || rm -rf build-$arch-$type
         mkdir -p build-$arch-$type
@@ -164,7 +163,6 @@ build_all() {
         $BUILDCMD ${CORES+-j$CORES}
         cd ..
     done
-    rm -f include/__config_site
     cd ..
 
     cd libcxx
