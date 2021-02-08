@@ -90,7 +90,7 @@ fi
 cd libffi && autoreconf -vfi && cd ..
 cd cpython
 cat ../MINGW-packages/mingw-w64-python/*.patch | patch -p1
-cat ../patches/python-* | patch -p1
+cat ../patches/python/*.patch | patch -p1
 autoreconf -vfi
 cd ..
 
