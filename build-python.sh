@@ -39,7 +39,7 @@ done
 
 if [ -z "$CHECKOUT_ONLY" ]; then
     if [ -z "$PREFIX" ]; then
-        echo $0 [--host=<triple>] dest
+        echo $0 --host=<triple> dest
         exit 1
     fi
 
