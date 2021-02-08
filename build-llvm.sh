@@ -37,6 +37,9 @@ while [ $# -gt 0 ]; do
     --host=*)
         HOST="${1#*=}"
         ;;
+    --with-python)
+        WITH_PYTHON=1
+        ;;
     *)
         PREFIX="$1"
         ;;
@@ -45,7 +48,7 @@ while [ $# -gt 0 ]; do
 done
 if [ -z "$CHECKOUT_ONLY" ]; then
     if [ -z "$PREFIX" ]; then
-        echo $0 [--enable-asserts] [--full-llvm] [--host=triple] dest
+        echo $0 [--enable-asserts] [--full-llvm] [--with-python] [--host=triple] dest
         exit 1
     fi
 
