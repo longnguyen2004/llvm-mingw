@@ -108,8 +108,9 @@ cd build-$HOST
 ../configure --prefix="$PREFIX" --host=$HOST --disable-symvers --disable-docs
 $MAKE -j$CORES
 $MAKE install
+cd ../..
 
-cd ../cpython
+cd cpython
 [ -z "$CLEAN" ] || rm -rf build-$HOST
 mkdir -p build-$HOST
 cd build-$HOST
