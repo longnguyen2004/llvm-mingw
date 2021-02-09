@@ -84,7 +84,7 @@ if [ -n "$SYNC" ] || [ -n "$CHECKOUT_PYTHON" ]; then
     cd cpython
     [ -z "$SYNC" ] || git fetch
     # Revert our patches
-    git reset *
+    git reset --hard HEAD
     git clean -fx
     git checkout $PYTHON_VERSION
     cat ../MINGW-packages/mingw-w64-python/*.patch | patch -Nup1
