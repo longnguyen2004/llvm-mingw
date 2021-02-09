@@ -69,13 +69,7 @@ if [ -n "$SYNC" ] || [ -n "$CHECKOUT_LIBFFI" ]; then
     git checkout $LIBFFI_VERSION
     git cherry-pick c06468f
     git cherry-pick 15d3ea3
-    cd ..
-fi
-
-if [ -n "$SYNC" ] || [ -n "$CHECKOUT_PYTHON" ]; then
-    cd cpython
-    [ -z "$SYNC" ] || git fetch
-    git checkout $PYTHON_VERSION
+    autoreconf -vfi
     cd ..
 fi
 
@@ -86,13 +80,15 @@ if [ -n "$SYNC" ] || [ -n "$CHECKOUT_PATCHES" ]; then
     cd ..
 fi
 
-# Patching
-cd libffi && autoreconf -vfi && cd ..
-cd cpython
-cat ../MINGW-packages/mingw-w64-python/*.patch | patch -p1
-cat ../patches/python/*.patch | patch -p1
-autoreconf -vfi
-cd ..
+if [ -n "$SYNC" ] || [ -n "$CHECKOUT_PYTHON" ]; then
+    cd cpython
+    [ -z "$SYNC" ] || git fetch
+    git reset * # Revert our patches
+    git checkout $PYTHON_VERSION
+    cat ../MINGW-packages/mingw-w64-python/*.patch | patch -Nup1
+    cat ../patches/python/*.patch | patch -Nup1
+    cd ..
+fi
 
 [ -z "$CHECKOUT_ONLY" ] || exit 0
 
