@@ -106,17 +106,17 @@ fi
 : ${CORES:=4}
 
 cd libffi
-[ -z "$CLEAN" ] || rm -rf build
-mkdir -p build
-cd build
+[ -z "$CLEAN" ] || rm -rf build-$HOST
+mkdir -p build-$HOST
+cd build-$HOST
 ../configure --prefix="$PREFIX" --host=$HOST --disable-symvers --disable-docs
 $MAKE -j$CORES
 $MAKE install
 
 cd ../cpython
-[ -z "$CLEAN" ] || rm -rf build
-mkdir -p build
-cd build
+[ -z "$CLEAN" ] || rm -rf build-$HOST
+mkdir -p build-$HOST
+cd build-$HOST
 BUILD=$(../config.guess) # Python configure requires build triplet for cross compilation
 
 export ac_cv_working_tzset=no
