@@ -111,6 +111,7 @@ $MAKE install
 cd ../..
 
 cd cpython
+rm -f PC/pyconfig.h
 [ -z "$CLEAN" ] || rm -rf build-$HOST
 mkdir -p build-$HOST
 cd build-$HOST
@@ -133,6 +134,8 @@ export CC=$HOST-clang
 export CXX=$HOST-clang++
 
 ../configure --prefix="$PREFIX" --build=$BUILD --host=$HOST \
+    CFLAGS=" -fwrapv -D__USE_MINGW_ANSI_STDIO=1 -D_WIN32_WINNT=0x0601 -DNDEBUG -I../PC -Wno-ignored-attributes" \
+    CXXFLAGS=" -fwrapv -D__USE_MINGW_ANSI_STDIO=1 -D_WIN32_WINNT=0x0601 -DNDEBUG -I../PC -Wno-ignored-attributes" \
     --enable-shared --with-nt-threads --with-system-ffi --without-ensurepip --without-c-locale-coercion
 # $MAKE regen-importlib
 # Omitting because it requires building a native Python, which gets complicated depending on what system we're building on
