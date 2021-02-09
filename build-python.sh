@@ -89,6 +89,7 @@ if [ -n "$SYNC" ] || [ -n "$CHECKOUT_PYTHON" ]; then
     git checkout $PYTHON_VERSION
     cat ../MINGW-packages/mingw-w64-python/*.patch | patch -Nup1
     cat ../patches/python/*.patch | patch -Nup1
+    autoreconf -vfi
     cd ..
 fi
 
