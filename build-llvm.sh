@@ -58,13 +58,11 @@ fi
 
 if [ ! -d llvm-project ]; then
     # When cloning master and checking out a pinned old hash, we can't use --depth=1.
-    #~ git clone https://github.com/llvm/llvm-project.git
-    git clone https://github.com/llvm/llvm-project.git --branch $LLVM_VERSION --single-branch
+    git clone https://github.com/llvm/llvm-project.git
     CHECKOUT=1
 fi
 
-#~ if [ -n "$SYNC" ] || [ -n "$CHECKOUT" ]; then
-if [ -n "$SYNC" ]; then
+if [ -n "$SYNC" ] || [ -n "$CHECKOUT" ]; then
     cd llvm-project
     [ -z "$SYNC" ] || git fetch
     git checkout $LLVM_VERSION
