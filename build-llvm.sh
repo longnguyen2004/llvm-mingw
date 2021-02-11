@@ -58,11 +58,13 @@ fi
 
 if [ ! -d llvm-project ]; then
     # When cloning master and checking out a pinned old hash, we can't use --depth=1.
-    git clone https://github.com/llvm/llvm-project.git
+    #~ git clone https://github.com/llvm/llvm-project.git
+    git clone https://github.com/llvm/llvm-project.git --branch $LLVM_VERSION --single-branch
     CHECKOUT=1
 fi
 
-if [ -n "$SYNC" ] || [ -n "$CHECKOUT" ]; then
+#~ if [ -n "$SYNC" ] || [ -n "$CHECKOUT" ]; then
+if [ -n "$SYNC" ]; then
     cd llvm-project
     [ -z "$SYNC" ] || git fetch
     git checkout $LLVM_VERSION
@@ -134,6 +136,19 @@ if [ -n "$HOST" ]; then
     CMAKEFLAGS="$CMAKEFLAGS -DCLANG_DEFAULT_CXX_STDLIB=libc++"
     CMAKEFLAGS="$CMAKEFLAGS -DCLANG_DEFAULT_LINKER=lld"
     BUILDDIR=$BUILDDIR-$HOST
+    
+    if [ -n "$WITH_PYTHON" ]; then
+        PYTHON_VER="3.8.7"
+        PYTHON_HOME="$PREFIX"
+
+        CMAKEFLAGS="$CMAKEFLAGS -DLLDB_ENABLE_PYTHON=ON"
+        CMAKEFLAGS="$CMAKEFLAGS -DPYTHON_HOME=$PYTHON_HOME"
+        CMAKEFLAGS="$CMAKEFLAGS -DPYTHON_LIBRARIES=$PYTHON_HOME/lib/python3.8/config-3.8/libpython3.8.dll.a"
+        CMAKEFLAGS="$CMAKEFLAGS -DPYTHON_INCLUDE_DIRS=$PYTHON_HOME/include/python3.8"
+        CMAKEFLAGS="$CMAKEFLAGS -DPYTHON_EXECUTABLE=python3"
+        CMAKEFLAGS="$CMAKEFLAGS -DLLDB_PYTHON_RELATIVE_PATH=python-$PYTHON_VER"
+        CMAKEFLAGS="$CMAKEFLAGS -DLLDB_PYTHON_HOME=python-$PYTHON_VER;"
+    fi
 fi
 
 TOOLCHAIN_ONLY=ON
