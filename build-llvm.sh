@@ -173,6 +173,7 @@ cd $BUILDDIR
 # same time, or unless the LLDB tests are disabled.
 cmake \
     ${CMAKE_GENERATOR+-G} "$CMAKE_GENERATOR" \
+    ${WITH_PYTHON+-DCMAKE_PREFIX_PATH=$PREFIX}
     -DCMAKE_INSTALL_PREFIX="$PREFIX" \
     -DCMAKE_BUILD_TYPE=Release \
     -DLLVM_ENABLE_ASSERTIONS=$ASSERTS \
