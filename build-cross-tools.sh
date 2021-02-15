@@ -29,6 +29,7 @@ HOST=$CROSS_ARCH-w64-mingw32
 
 if [ "$4" = "--with-python" ]; then
     ./build-python.sh $PREFIX/python --host=$HOST
+    cp $PREFIX/python/bin/*.dll $PREFIX/bin
     LLVM_WITH_PYTHON="--with-python"
 fi
 
