@@ -145,5 +145,4 @@ export CXX=$HOST-clang++
 # Omitting because it requires building a native Python, which gets complicated depending on what system we're building on
 $MAKE -j$CORES
 $MAKE install
-cp libpython${PYTHON_MAJOR}.${PYTHON_MINOR}.dll.a "$PREFIX/lib"
 cd ../..
