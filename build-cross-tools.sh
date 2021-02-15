@@ -28,7 +28,7 @@ export PATH="$NATIVE/bin:$PATH"
 HOST=$CROSS_ARCH-w64-mingw32
 
 if [ "$4" = "--with-python" ]; then
-    ./build-python.sh $PREFIX --host=$HOST
+    ./build-python.sh $PREFIX/python --host=$HOST
     LLVM_WITH_PYTHON="--with-python"
 fi
 
