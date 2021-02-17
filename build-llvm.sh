@@ -138,8 +138,8 @@ if [ -n "$HOST" ]; then
     if [ -n "$WITH_PYTHON" ]; then
         PYTHON_VER="3.8"
         CMAKEFLAGS="$CMAKEFLAGS -DLLDB_ENABLE_PYTHON=ON"
-        [ -z "$PYTHON_EXEC" ] && which -s python3 && [ $? -eq 0 ] && PYTHON_EXEC=python3
-        [ -z "$PYTHON_EXEC" ] && which -s python  && [ $? -eq 0 ] && PYTHON_EXEC=python
+        [ -z "$PYTHON_EXEC" ] && command -v python3 && PYTHON_EXEC=python3
+        [ -z "$PYTHON_EXEC" ] && command -v python  && PYTHON_EXEC=python
         CMAKEFLAGS="$CMAKEFLAGS -DPYTHON_HOME=$PREFIX/python"
         CMAKEFLAGS="$CMAKEFLAGS -DLLDB_PYTHON_HOME=../python"
         CMAKEFLAGS="$CMAKEFLAGS -DLLDB_PYTHON_RELATIVE_PATH=python/lib/python$PYTHON_VER/site-packages"
